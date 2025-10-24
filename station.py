@@ -1,4 +1,5 @@
 class Station:
-    # A station should have the metro lines running through it
-    def __init__(self):
-        pass
+    # A station should have its id and name
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
