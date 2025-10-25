@@ -1,5 +1,5 @@
 class Line:
     # A metro line needs the stations it goes through
-    def __init__(self, name, station_ids):
+    def __init__(self, name, connections):
         self.name = name
-        self.stations = station_ids
+        self.connections = connections

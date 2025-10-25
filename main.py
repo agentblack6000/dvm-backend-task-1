@@ -51,7 +51,7 @@ for user in users:
 if show_stations:
     print("The list of stations available are:")
     for station in stations:
-        print(station)
+        print(station[1])
 
 if show_tickets:
     for ticket in tickets:

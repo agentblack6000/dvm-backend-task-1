@@ -2,9 +2,11 @@
 Helper file that writes the data to the csv files
 """
 import csv
+from station import Station
 
 # station_id, station_name
-stations = [[1, "one"], [2, "two"], [3, "three"], [4, "four"]]
+stations = [[1, "one"], [2, "two"], [3, "three"], [4, "four"], [5, "five"], [6, "six"], [7, "seven"]]
+stations_data = [Station(station[0], station[1]) for station in stations]
 
 # user_id, user_name
 users = [[1, 'foo'], [2, 'bar'], [3, 'baz']]
