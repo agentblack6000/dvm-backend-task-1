@@ -78,6 +78,13 @@ class Network:
         
         return price
 
+    def graph_connections(self):
+        connections = set()
+        for line in self.lines:
+            for connection in line.connections:
+                connections.add(connection)
+        
+        return connections
 
 # Creates the railway network
 one_two = Connection(stations_data[0], stations_data[1], 5, 5)
@@ -89,10 +96,10 @@ two_seven = Connection(stations_data[1], stations_data[6], 5, 5)
 six_one = Connection(stations_data[5], stations_data[0], 5, 5)
 
 
-blue_line = Line("Blue Line", [one_two, two_three, three_four])
-red_line = Line("Red Line", [three_six, six_one])
-green_line = Line("Green Line", [one_two, two_three, three_five])
-yellow_line = Line("Yellow Line", [two_seven])
+blue_line = Line("Blue Line", [one_two, two_three, three_four], "blue")
+red_line = Line("Red Line", [three_six, six_one], "red")
+green_line = Line("Green Line", [one_two, two_three, three_five], "green")
+yellow_line = Line("Yellow Line", [one_two, two_seven], "yellow")
 
 
 undergound_network = Network([blue_line, red_line, green_line, yellow_line])

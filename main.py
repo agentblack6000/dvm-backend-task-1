@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from creator import stations_data
 from ticket import Ticket
+from map import map_maker
 import csv
 
 
@@ -27,11 +28,13 @@ parser.add_argument("-s", "--station", action='store_true', help="Shows a list o
 parser.add_argument("-p", "--purchase", nargs=2, choices=[station.name for station in stations_data],
                     help="Purchase a ticket from station to station", metavar=('station_A', 'station_B'))
 parser.add_argument("-v", "--view", action='store_true', help="View all purchased tickets.")
+parser.add_argument("-m", "--map", action='store_true', help="Display the map")
 
 # Get the command-line arguments the user provided
 args = parser.parse_args()
 show_stations = args.station
 show_tickets = args.view
+show_map = args.map
 route = args.purchase
 
 user_name = args.user
@@ -52,6 +55,9 @@ if show_tickets:
         if ticket[1] == user_id:
             # print(f"{user_name} has a ticket from {station_names[ticket[2]]} to {station_names[ticket[3]]}, purchased at ${ticket[4]}.")
             pass
+
+if show_map:
+    map_maker()
 
 if route is not None:
     start, destination = route[0], route[1]
