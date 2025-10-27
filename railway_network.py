@@ -6,7 +6,7 @@ class Network:
     def __init__(self, lines: list):
         self.lines = lines
 
-    def find_shortest_path(self, start, destination):
+    def find_shortest_path(self, start, destination) -> list:
         graph = {}
         connections = []
         for line in self.lines:
@@ -59,8 +59,24 @@ class Network:
             current_node = previous[current_node]
         path_taken.reverse()
         
-        print(path_taken)
-        pass
+        route = set()
+        ordered_route = []
+        for track in connections:
+            if str(track.point_a) in path_taken and str(track.point_b) in path_taken:
+                route.add(track)
+
+                if track in route and (track not in ordered_route):
+                    ordered_route.append(track)
+        
+        return ordered_route
+
+    def calculate_price(self, start, destination):
+        shortest_path = self.find_shortest_path(start, destination)
+        price = 0
+        for connection in shortest_path:
+            price += connection.cost
+        
+        return price
 
 
 # Creates the railway network
@@ -80,4 +96,3 @@ yellow_line = Line("Yellow Line", [two_seven])
 
 
 undergound_network = Network([blue_line, red_line, green_line, yellow_line])
-undergound_network.find_shortest_path(stations_data[3], stations_data[4])

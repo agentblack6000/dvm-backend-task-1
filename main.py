@@ -1,14 +1,8 @@
 from argparse import ArgumentParser
+from creator import stations_data
+from ticket import Ticket
 import csv
 
-# Read exisiting data
-stations = []
-station_names = {}
-with open("csv_files/stations.csv", "r") as file:
-    reader = csv.reader(file, delimiter=',')
-    for station_data in reader:
-        station_names[station_data[0]] = station_data[1]
-        stations.append(station_data)
 
 user_names = []
 users = []
@@ -30,7 +24,7 @@ parser = ArgumentParser(prog="Metro Ticket Purchasing System",
 
 parser.add_argument("--user", required=True, choices=user_names)
 parser.add_argument("-s", "--station", action='store_true', help="Shows a list of all available stations")
-parser.add_argument("-p", "--purchase", nargs=2, choices=station_names.values(),
+parser.add_argument("-p", "--purchase", nargs=2, choices=[station.name for station in stations_data],
                     help="Purchase a ticket from station to station", metavar=('station_A', 'station_B'))
 parser.add_argument("-v", "--view", action='store_true', help="View all purchased tickets.")
 
@@ -50,10 +44,26 @@ for user in users:
 
 if show_stations:
     print("The list of stations available are:")
-    for station in stations:
-        print(station[1])
+    for station in stations_data:
+        print(station.name)
 
 if show_tickets:
     for ticket in tickets:
         if ticket[1] == user_id:
-            print(f"{user_name} has a ticket from {station_names[ticket[2]]} to {station_names[ticket[3]]}, purchased at ${ticket[4]}.")
+            # print(f"{user_name} has a ticket from {station_names[ticket[2]]} to {station_names[ticket[3]]}, purchased at ${ticket[4]}.")
+            pass
+
+if route is not None:
+    start, destination = route[0], route[1]
+    for station in stations_data:
+        if station.name == start:
+            start = station
+        
+        if station.name == destination:
+            destination = station
+        
+    
+    if start == destination:
+        print("You're already there")
+    else:
+        tix = Ticket(5, 1, start, destination)
