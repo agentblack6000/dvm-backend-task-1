@@ -1,7 +1,10 @@
 from railway_network import undergound_network
 
 class Ticket:
-    # Tickets need to have their price (calculate), start and end points, and the user they're linked with
+    """
+    Creates a ticket with the provided ids, start and end Stations
+    Prints user help for the journey
+    """
     def __init__(self, id, user_id, start_station, destination):
         self.id = id
         self.user = user_id

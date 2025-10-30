@@ -1,10 +1,20 @@
+"""
+DVM Backend Task 1
+Your task is to write a command-line app that allows users to purchase tickets to travel from one 
+metro station to another. You’re required to use the concepts of Object Oriented Programming to 
+achieve this.
+
+Using argument parser, gets the command-line arguments and updates the database in case of a 
+new ticket purchase.
+"""
+import csv
+import uuid
+
 from argparse import ArgumentParser
 from creator import stations_data, tickets
 from railway_network import undergound_network
 from ticket import Ticket
 from map import map_maker
-import csv
-import uuid
 
 user_names = []
 users = []

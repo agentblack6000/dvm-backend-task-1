@@ -1,5 +1,7 @@
 class Line:
-    # A metro line needs the stations it goes through
+    """
+    Stores the actual connection data of the stations in the railway network, along with its name and color
+    """
     def __init__(self, name, connections, color):
         self.name = name
         self.connections = connections

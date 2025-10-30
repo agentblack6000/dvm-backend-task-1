@@ -3,6 +3,10 @@ from metro_line import Line
 from creator import stations_data
 
 class Network:
+    """
+    Implements the railway network
+    Uses Dijkstra's algorithm to find the shortest path between two Stations
+    """
     def __init__(self, lines: list):
         self.lines = lines
 

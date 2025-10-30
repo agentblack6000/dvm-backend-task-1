@@ -1,3 +1,6 @@
+"""
+Creates a map (plots a graph with edges and nodes) using the networkx and matplotlib libraries
+"""
 import networkx as nx
 import matplotlib.pyplot as plt
 from railway_network import undergound_network
