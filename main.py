@@ -11,18 +11,10 @@ import csv
 import uuid
 
 from argparse import ArgumentParser
-from creator import stations_data, tickets
+from creator import stations_data, tickets, users, user_names
 from railway_network import undergound_network
 from ticket import Ticket
 from map import map_maker
-
-user_names = []
-users = []
-with open("csv_files/users.csv", "r") as file:
-    reader = csv.reader(file, delimiter=',')
-    for user_data in reader:
-        user_names.append(user_data[1])
-        users.append(user_data)
 
 # Configure ArgumentParser
 parser = ArgumentParser(prog="Metro Ticket Purchasing System", 

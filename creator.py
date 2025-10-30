@@ -29,3 +29,12 @@ with open("csv_files/tickets.csv", "r") as file:
     reader = csv.reader(file)
     for row in reader:
         tickets.append(row)
+
+user_names = []
+users = []
+
+with open("csv_files/users.csv", "r") as file:
+    reader = csv.reader(file, delimiter=',')
+    for user_data in reader:
+        user_names.append(user_data[1])
+        users.append(user_data)
