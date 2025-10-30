@@ -5,21 +5,25 @@ import csv
 from station import Station
 
 # station_id, station_name
-stations = [[1, "one"], [2, "two"], [3, "three"], [4, "four"], [5, "five"], [6, "six"], [7, "seven"]]
-stations_data = [Station(station[0], station[1]) for station in stations]
+stations = []
+stations_data = []
 
 # user_id, user_name
-users = [[1, 'foo'], [2, 'bar'], [3, 'baz']]
+users = []
 
 tickets = []
 
-with open("csv_files/stations.csv", 'w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerows(stations)
+with open("csv_files/stations.csv", 'r', newline='') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        stations.append([int(row[0]), row[1]])
 
-with open("csv_files/users.csv", 'w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerows(users)
+stations_data = [Station(station[0], station[1]) for station in stations]
+
+with open("csv_files/users.csv", 'r', newline='') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        users.append([int(row[0]), row[1]])
 
 with open("csv_files/tickets.csv", "r") as file:
     reader = csv.reader(file)
