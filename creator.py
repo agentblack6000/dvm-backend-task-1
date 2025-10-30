@@ -1,5 +1,5 @@
 """
-Helper file that writes the data to the csv files
+Helper file that reads data from csv files and provides it where necessary
 """
 import csv
 from station import Station
