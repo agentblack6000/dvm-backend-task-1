@@ -1,9 +1,10 @@
 from argparse import ArgumentParser
-from creator import stations_data
+from creator import stations_data, tickets
+from railway_network import undergound_network
 from ticket import Ticket
 from map import map_maker
 import csv
-
+import uuid
 
 user_names = []
 users = []
@@ -12,12 +13,6 @@ with open("csv_files/users.csv", "r") as file:
     for user_data in reader:
         user_names.append(user_data[1])
         users.append(user_data)
-
-tickets = []
-with open("csv_files/tickets.csv", "r") as file:
-    reader = csv.reader(file, delimiter=',')
-    for ticket_data in reader:
-        tickets.append(ticket_data)
 
 # Configure ArgumentParser
 parser = ArgumentParser(prog="Metro Ticket Purchasing System", 
@@ -43,7 +38,7 @@ user_name = args.user
 user_id = None
 for user in users:
     if user_name == user[1]:
-        user_id = user[0]
+        user_id = int(user[0])
 
 if show_stations:
     print("The list of stations available are:")
@@ -51,10 +46,10 @@ if show_stations:
         print(station.name)
 
 if show_tickets:
+    station_ids = {station.id: station for station in stations_data}
     for ticket in tickets:
-        if ticket[1] == user_id:
-            # print(f"{user_name} has a ticket from {station_names[ticket[2]]} to {station_names[ticket[3]]}, purchased at ${ticket[4]}.")
-            pass
+        if int(ticket[1]) == user_id:
+            print(f"{user_name} has a ticket from {station_ids[int(ticket[2])].name} to {station_ids[int(ticket[3])].name}, purchased at ${ticket[4]}.")
 
 if show_map:
     map_maker()
@@ -67,9 +62,16 @@ if route is not None:
         
         if station.name == destination:
             destination = station
-        
     
     if start == destination:
         print("You're already there")
     else:
-        tix = Ticket(5, 1, start, destination)
+        print("Purchase successful")
+        unique_id = str(uuid.uuid4())
+        new_ticket = Ticket(unique_id, user_id, start, destination)
+        price = undergound_network.calculate_price(start, destination)
+        ticket_data = [new_ticket.id, user_id, new_ticket.start.id, new_ticket.destination.id, price]
+        
+        with open("csv_files/tickets.csv", "a") as file:
+            writer = csv.writer(file)
+            writer.writerow(ticket_data)
