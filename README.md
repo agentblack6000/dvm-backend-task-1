@@ -2,12 +2,24 @@
 
 ## User Manual
 
-## Functionality
+To use the command line app, clone the repo and run:
+```shell
+python main.py -h
+```
+
+Example command to view all purchased tickets by user 'foo':
+```shell
+python main.py --user foo -v
+```
+
+
+
+## Functionality Implemented
 
 1. Users can see a list of all the metro stations available.
 2. Users can purchase a ticket from one metro station to another.
 3. Users can see their purchased tickets.
-4. Each ticket has a unique ID associated with it.
+4. Each ticket has a unique ID associated with it. (generated using Python's uuid library)
 5. The price of a ticket is based on how many stations the user will cross on the shortest path to their destination.
 6. There can be multiple metro lines, and some stations are expected to act as crossroads between 2 or more lines, which allows passengers to change lines.
 7. Users can purchase tickets to travel between stations on different lines.
