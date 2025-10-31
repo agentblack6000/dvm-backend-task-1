@@ -7,10 +7,10 @@ achieve this.
 Using argument parser, gets the command-line arguments and updates the database in case of a 
 new ticket purchase.
 """
+from argparse import ArgumentParser
 import csv
 import uuid
 
-from argparse import ArgumentParser
 from creator import stations_data, tickets, users, user_names
 from railway_network import undergound_network
 from ticket import Ticket
@@ -39,8 +39,9 @@ user_name = args.user
 # Get user id from the database
 user_id = None
 for user in users:
-    if user_name == user[1]:
-        user_id = int(user[0])
+    if user_name == user.name:
+        user_id = user.id
+
 
 if show_stations:
     print("The list of stations available are:")

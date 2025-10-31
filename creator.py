@@ -2,6 +2,8 @@
 Helper file that reads data from csv files and provides it where necessary
 """
 import csv
+
+from user import User
 from station import Station
 
 # station_id, station_name
@@ -37,4 +39,4 @@ with open("csv_files/users.csv", "r") as file:
     reader = csv.reader(file, delimiter=',')
     for user_data in reader:
         user_names.append(user_data[1])
-        users.append(user_data)
+        users.append(User(id=int(user_data[0]), name=user_data[1]))
